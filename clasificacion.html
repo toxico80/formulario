@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Calificaciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ffffff, #ffffff);
+            color: #000000;
+        }
+        .form-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        h1 {
+            text-align: center;
+            color: #000000;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #c20ae7;
+            color: white;
+        }
+        input, textarea, select, button {
+            font-size: 14px;
+        }
+        input[type="text"], input[type="number"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+            border-color: #ee01ff;
+            outline: none;
+            box-shadow: 0 0 10px rgb(210, 0, 233);
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #cc09f3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #bf0bd3;
+            transform: scale(1.05);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 80px;
+            height: auto;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        .header p {
+            font-size: 14px;
+            color: #000000;
+        }
+        .submit-container {
+            text-align: center;
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-container input[type="text"] {
+            width: 60%;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="batei.png" alt="Logo del Politécnico">
+        <h1>Politécnico Profesor Juan de la Cruz Abad</h1>
+        <p>Estudia y Triunfarás</p>
+    </div>
+
+    <!-- Formulario de Búsqueda -->
+    <div class="search-container">
+        <form action="search.php" method="GET">
+            <input type="text" name="search_term" placeholder="Buscar estudiante..." required>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+
+    <div class="form-container">
+        <h1>Reporte de Calificaciones</h1>
+        <form action="process.php" method="POST">
+            <table>
+                <tr>
+                    <th colspan="2">Información del Estudiante</th>
+                </tr>
+                <tr>
+                    <td>Nombre y Apellidos:</td>
+                    <td><input type="text" name="name" required></td>
+                </tr>
+                <tr>
+                    <td>Grado:</td>
+                    <td><input type="text" name="grade" required></td>
+                </tr>
+                <tr>
+                    <th colspan="2">Calificaciones Académicas</th>
+                </tr>
+                <tr>
+                    <td>Lengua Española:</td>
+                    <td><input type="number" name="spanish" min="0" max="100" required></td>
+                </tr>
+                <tr>
+                    <td>Lengua Extranjera (Inglés):</td>
+                    <td><input type="number" name="english" min="0" max="100" required></td>
+                </tr>
+                <tr>
+                    <td>Matemática:</td>
+                    <td><input type="number" name="math" min="0" max="100" required></td>
+                </tr>
+                <tr>
+                    <td>Ciencias Sociales:</td>
+                    <td><input type="number" name="social_science" min="0" max="100" required></td>
+                </tr>
+                <tr>
+                    <td>Ciencias de la Naturaleza:</td>
+                    <td><input type="number" name="natural_science" min="0" max="100" required></td>
+                </tr>
+                <tr>
+                    <th colspan="2">Calificaciones Técnicas</th>
+                </tr>
+                <tr>
+                    <td>Administración de Base de Datos:</td>
+                    <td><input type="number" name="db_admin" min="0" max="10" required></td>
+                </tr>
+                <tr>
+                    <td>Desarrollo de Aplicaciones:</td>
+                    <td><input type="number" name="app_dev" min="0" max="10" required></td>
+                </tr>
+                <tr>
+                    <td>Análisis y Diseño de Reportes:</td>
+                    <td><input type="number" name="report_design" min="0" max="10" required></td>
+                </tr>
+                <tr>
+                    <th colspan="2">Condición Final</th>
+                </tr>
+                <tr>
+                    <td>Promovido:</td>
+                    <td class="center"><input type="radio" name="final_condition" value="Promovido" required></td>
+                </tr>
+                <tr>
+                    <td>Reprobado:</td>
+                    <td class="center"><input type="radio" name="final_condition" value="Reprobado" required></td>
+                </tr>
+                <tr>
+                    <th colspan="2">Comentarios</th>
+                </tr>
+                <tr>
+                    <td colspan="2"><textarea name="comments" rows="4" placeholder="Escribe tus comentarios aquí"></textarea></td>
+                </tr>
+            </table>
+            <div class="submit-container">
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+    <div class="submit-container">
+        <form action="generate_pdf.php" method="GET" style="display:inline;">
+            <button type="submit">Imprimir en PDF</button>
+        </form>
+    </div>
+    
+</body>
+</html>
